@@ -2,6 +2,32 @@ import json
 import pandas as pd
 import config
 
+def get_hourly_data (field):
+    field_dic = {}
+    field_dic[field['name']], metadata, inputs = pvlib.iotools.get_pvgis_hourly(latitude=latitude,
+                               longitude=longitude,
+                               start=startyear,
+                               end=endyear,
+                               raddatabase=None,
+                               components=True,
+                               surface_tilt=field['tilt'],
+                               surface_azimuth=field['azimuth'],
+                               outputformat='json',
+                               usehorizon=True,
+                               userhorizon=None,
+                               pvcalculation=True,
+                               peakpower=1,
+                               pvtechchoice='crystSi',
+                               mountingplace='building',
+                               loss=14,
+                               trackingtype=0,
+                               optimal_surface_tilt=False,
+                               optimalangles=False,
+                               url='https://re.jrc.ec.europa.eu/api/',
+                               map_variables=True,
+                               timeout=30)
+    return field_dic
+
 def load_hourly_solar_data(filename="data/hourly_data.json", solar_fields=None):
     with open(filename, "r") as f:
         raw_data = json.load(f)

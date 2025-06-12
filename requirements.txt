@@ -1,5 +1,4 @@
-calendar
-json
-matplotlib.pyplot
+matplotlib
 pandas
 pvlib
+streamlit
